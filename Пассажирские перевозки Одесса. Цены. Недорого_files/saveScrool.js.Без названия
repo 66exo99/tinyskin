@@ -1,0 +1,16 @@
+/**
+ * Created by Zel on 22.03.2016.
+ */
+function getCookie(name) {
+    var matches = document.cookie.match(new RegExp(
+        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+function saveScrool() {
+    var scroll = window.scrollY;
+    var date = new Date(new Date().getTime() + 180 * 1000);
+    document.cookie = document.location.href+".scroll="+scroll+"; expires="+date.toUTCString();
+}
+document.getElementsByTagName('body')[0].addEventListener('click', saveScrool);
+window.scrollTo(0, Number(getCookie(document.location.href+".scroll")));
